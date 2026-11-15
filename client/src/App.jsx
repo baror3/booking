@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar/Navbar";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -71,55 +72,7 @@ export default function App() {
   return (
     <div dir="rtl" style={{ fontFamily: "Arial, sans-serif", margin: 0 }}>
       {/* סרגל כלים עליון */}
-      <nav style={{ display: "flex", justifyContent: "space-between", padding: "1rem 2rem", background: "#6783de", color: "#fff", alignItems: "center" }}>
-        <div style={{ fontSize: "1.5rem", fontWeight: "bold", cursor: "pointer" }} onClick={() => setCurrentPage("home")}>
-          Booking
-        </div>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          <button onClick={() => setCurrentPage("home")} style={navBtnStyle}>דף הבית</button>
-          <button onClick={() => setCurrentPage("hotels")} style={navBtnStyle}>מלונות</button>
-
-          {user ? (
-            <>
-              <span>שלום, {user.username}</span>
-              <button onClick={handleLogout} style={{ padding: "0.4rem 0.8rem", cursor: "pointer" }}>התנתק</button>
-            </>
-          ) : (
-            <>
-            <button 
-  onClick={() => setCurrentPage("login")} 
-  style={{ 
-    ...navBtnStyle, 
-    background: "#fff", 
-    color: "#9dade4", 
-    fontWeight: "bold", 
-    padding: "0.6rem 1.4rem",    // מגדיל את המרווח הפנימי (עסיסיות)
-    borderRadius: "20px",        // מעגל את הפינות בצורה מלאה ומודרנית
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)" // מוסיף הצללה עדינה
-  }}
->
-  התחברות
-</button>
-
-<button 
-  onClick={() => setCurrentPage("register")} 
-  style={{ 
-    ...navBtnStyle, 
-    background: "#febb02", 
-    color: "#000", 
-    fontWeight: "bold", 
-    padding: "0.6rem 1.4rem",    // מגדיל את המרווח הפנימי
-    borderRadius: "20px",        // מעגל את הפינות בצורה מלאה ומודרנית
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)" // מוסיף הצללה עדינה
-  }}
->
-  הרשמה
-</button>
-
-            </>
-          )}
-        </div>
-      </nav>
+      <Navbar user={user} setCurrentPage={setCurrentPage} handleLogout={handleLogout} />
 
       {/* תצוגת העמודים */}
       <main style={{ padding: "2rem" }}>
