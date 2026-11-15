@@ -1,0 +1,67 @@
+
+// קובץ זה הוא הלב והמוח של פריזמה בפרוייקט שלי
+
+// מגדיר את החיבור הפיזי
+// "סוג בסיס הנתונים שלנו הוא PostgreSQL (הסוג של ניאון), ואת הכתובת הסודית והסיסמה כדי להיכנס אליו תמצאי בתוך קובץ ה-.env תחת השם DATABASE_URL".
+
+datasource db {
+  provider = "postgresql"
+  // url      = env("DATABASE_URL")
+}
+
+// מייצר לך פקודות ה-JavaScript לפרויקט
+// הוא אומר לפריזמה: "תייצרי לי קוד ג'אווהסקריפט (Prisma Client) כדי שאוכל לכתוב בשרת פקודות נוחות כמו prisma.booking.create(). ותפעילי את התכונה המיוחדת driverAdapters כי הקורס שלי דורש שנשתמש ב-PG Adapter בשביל החיבור"
+
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = ["driverAdapters"]
+}
+
+// הטבלאות
+
+// 1. טבלת משתמשים
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  password String
+  bookings Booking[]
+}
+
+// 2. טבלת מלונות
+model Hotel {
+  id            Int     @id @default(autoincrement())
+  name          String  // שם המלון
+  stars         Int     // מספר הכוכבים (1-5)
+  country       String  // ארץ המלון
+  city          String  // עיר המלון
+  numberOfRooms Int     // מספר החדרים במלון
+  description   String? // תיאור אופציונלי
+  rooms         Room[]
+}
+
+// 3. טבלת חדרים (מחוברת למלון)
+model Room {
+  id         Int       @id @default(autoincrement())
+  hotelId    Int       @map("hotel") // ממפה את השדה בקוד למילה hotel כמו בפלט
+  name       String    // ✨ שונה מ-title ל-name לפי דף 4!
+  size       Float     // ✨ שונה מ-sizeSqM ל-size לפי דף 4!
+  price      Float     // מחיר ללילה
+  maxGuests  Int       @map("max_guests") // ממפה ל-max_guests כמו בפלט
+
+  hotel      Hotel     @relation(fields: [hotelId], references: [id])
+  bookings   Booking[]
+}
+
+// 4. טבלת הזמנות (מחוברת למשתמש ולחדר)
+model Booking {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  roomId     Int
+  startDate  DateTime // תאריך כניסה
+  endDate    DateTime // תאריך עזיבה
+  totalPrice Float    // המחיר הסופי כולל מע"מ
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+  room       Room     @relation(fields: [roomId], references: [id])
+}
