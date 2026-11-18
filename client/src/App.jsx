@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./components/HomePage/HomePage";
+import HotelsPage from "./components/HotelsPage/HotelsPage";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -80,20 +81,7 @@ export default function App() {
         {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
 
         {currentPage === "hotels" && (
-          <div>
-            <h2>רשימת המלונות</h2>
-            {hotels.length === 0 ? <p>טוען מלונות...</p> : (
-              hotels.map(hotel => (
-                <div key={hotel.id} style={{ border: "1px solid #ccc", padding: "1rem", margin: "1rem 0", borderRadius: "5px" }}>
-                  <h3>{hotel.name} ({hotel.city}, {hotel.country})</h3>
-                  <p>דירוג כוכבים: {hotel.stars}</p>
-                  <button onClick={() => handleSelectHotel(hotel)} style={actionBtnStyle}>
-                    לפרטי המלון
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
+          <HotelsPage hotels={hotels} handleSelectHotel={handleSelectHotel} />
         )}
 
         {currentPage === "hotel-details" && (
