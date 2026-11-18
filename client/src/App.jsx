@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import HomePage from "./components/HomePage/HomePage";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -76,23 +77,7 @@ export default function App() {
 
       {/* תצוגת העמודים */}
       <main style={{ padding: "2rem" }}>
-        {currentPage === "home" && (
-          <div style={{ textAlign: "center" }}>
-            <h1>ברוכים הבאים</h1>
-            <p>כאן תוכלו למצוא את המלונות והחדרים הטובים ביותר לחופשה הבאה שלכם🏖️</p>
-            <button onClick={() => setCurrentPage("hotels")} style={{ padding: "0.8rem 1.5rem", background: "#9dade4", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1rem", marginTop: "1.5rem" }}>
-              צפה ברשימת המלונות
-            </button>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
-              <img
-                src="https://images.unsplash.com/photo-1623718649591-311775a30c43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
-                alt="מלון"
-                style={{ maxWidth: "100%", width: "500px", borderRadius: "8px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}
-              />
-            </div>
-
-          </div>
-        )}
+        {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
 
         {currentPage === "hotels" && (
           <div>
