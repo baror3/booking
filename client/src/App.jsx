@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import HomePage from "./components/HomePage/HomePage";
-import HotelsPage from "./components/HotelsPage/HotelsPage";
-import HotelDetailsPage from "./components/HotelDetailsPage/HotelDetailsPage";
-import RoomDetailsPage from "./components/RoomDetailsPage/RoomDetailsPage";
-import BookingPage from "./components/BookingPage/BookingPage";
+import HomePage from "./Pages/HomePage/HomePage";
+import HotelsPage from "./Pages/HotelsPage/HotelsPage";
+import HotelDetailsPage from "./Pages/HotelDetailsPage/HotelDetailsPage";
+import RoomDetailsPage from "./Pages/RoomDetailsPage/RoomDetailsPage";
+import BookingPage from "./Pages/BookingPage/BookingPage";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 
