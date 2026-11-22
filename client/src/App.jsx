@@ -4,6 +4,7 @@ import HomePage from "./components/HomePage/HomePage";
 import HotelsPage from "./components/HotelsPage/HotelsPage";
 import HotelDetailsPage from "./components/HotelDetailsPage/HotelDetailsPage";
 import RoomDetailsPage from "./components/RoomDetailsPage/RoomDetailsPage";
+import BookingPage from "./components/BookingPage/BookingPage";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -189,70 +190,6 @@ function RegisterForm({ onRegisterSuccess, switchToLogin, errorMsg, setErrorMsg 
         <button type="submit" style={{ padding: "0.6rem", background: "#febb02", color: "#000", border: "none", cursor: "pointer" }}>הירשם</button>
       </form>
       <p style={{ marginTop: "1rem" }}>כבר יש לך חשבון? <span onClick={switchToLogin} style={{ color: "#9dade4", cursor: "pointer" }}>להתחברות</span></p>
-    </div>
-  );
-}
-
-// קומפוננטת טופס הזמנה שולחת פקודת POST לשרת עם הטוקן המאומת
-function BookingPage({ room, hotelId, user, onBack }) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [message, setMessage] = useState(null);
-  const [error, setError] = useState(null);
-
-  const handleBookingSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setMessage(null);
-
-    try {
-      const res = await fetch(`${API_URL}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${user.token}` // שולח את הטוקן שהתקבל בהתחברות לצורך אימות בשרת
-        },
-        body: JSON.stringify({
-          hotelId: Number(hotelId || room.hotelId),
-          roomId: Number(room.id),
-          startDate,
-          endDate
-        })
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "ההזמנה נכשלה");
-
-      setMessage(data.message || "ההזמנה בוצעה בהצלחה!");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  return (
-    <div style={{ maxWidth: "500px", margin: "auto", border: "1px solid #ccc", padding: "2rem", borderRadius: "8px" }}>
-      <h2>טופס ביצוע הזמנה</h2>
-      <p><strong>משתמש מזמין:</strong> {user?.username}</p>
-      <p><strong>חדר מבוקש:</strong> {room?.name} (מחיר ללילה: {room?.price} ₪)</p>
-
-      {error && <div style={{ background: "#ffe6e6", color: "red", padding: "1rem", marginBottom: "1rem", borderRadius: "4px" }}>{error}</div>}
-      {message && <div style={{ background: "#e6ffe6", color: "green", padding: "1rem", marginBottom: "1rem", borderRadius: "4px" }}>{message}</div>}
-
-      <form onSubmit={handleBookingSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <label>תאריך כניסה:
-          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} required style={{ display: "block", width: "100%", padding: "0.4rem", marginTop: "0.3rem" }} />
-        </label>
-        <label>תאריך עזיבה:
-          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} required style={{ display: "block", width: "100%", padding: "0.4rem", marginTop: "0.3rem" }} />
-        </label>
-
-        <button type="submit" style={{ padding: "0.6rem 1.2rem", background: "green", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer", fontWeight: "bold" }}>
-          שלח הזמנה
-        </button>
-      </form>
-      <button onClick={onBack} style={{ marginTop: "1rem", background: "transparent", border: "none", color: "blue", cursor: "pointer", textDecoration: "underline" }}>
-        חזרה למלונות
-      </button>
     </div>
   );
 }

@@ -1,0 +1,55 @@
+.booking-container {
+  max-width: 500px;
+  margin: auto;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.booking-error {
+  background: #ffe6e6;
+  color: red;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.booking-success {
+  background: #e6ffe6;
+  color: green;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.booking-input {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.booking-submit-btn {
+  padding: 0.6rem 1.2rem;
+  background: green;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.booking-back-btn {
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
