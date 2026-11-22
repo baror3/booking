@@ -5,6 +5,7 @@ import HotelsPage from "./components/HotelsPage/HotelsPage";
 import HotelDetailsPage from "./components/HotelDetailsPage/HotelDetailsPage";
 import RoomDetailsPage from "./components/RoomDetailsPage/RoomDetailsPage";
 import BookingPage from "./components/BookingPage/BookingPage";
+import LoginForm from "./components/LoginForm/LoginForm";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -115,43 +116,6 @@ export default function App() {
           <RegisterForm onRegisterSuccess={() => setCurrentPage("login")} switchToLogin={() => setCurrentPage("login")} errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
         )}
       </main>
-    </div>
-  );
-}
-
-// קומפוננטת התחברות מדברת עם השרת (/api/login)
-function LoginForm({ onLoginSuccess, switchToRegister, errorMsg, setErrorMsg }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg("");
-    try {
-      const res = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "התחברות נכשלה");
-
-      onLoginSuccess({ userId: data.userId, username: data.username, token: data.token });
-    } catch (err) {
-      setErrorMsg(err.message);
-    }
-  };
-
-  return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "2rem", border: "1px solid #ccc", borderRadius: "8px" }}>
-      <h2>התחברות למערכת</h2>
-      {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <input type="text" placeholder="שם משתמש" value={username} onChange={e => setUsername(e.target.value)} required style={{ padding: "0.5rem" }} />
-        <input type="password" placeholder="סיסמה" value={password} onChange={e => setPassword(e.target.value)} required style={{ padding: "0.5rem" }} />
-        <button type="submit" style={{ padding: "0.6rem", background: "#9dade4", color: "#fff", border: "none", cursor: "pointer" }}>התחבר</button>
-      </form>
-      <p style={{ marginTop: "1rem" }}>אין לך חשבון? <span onClick={switchToRegister} style={{ color: "blue", cursor: "pointer" }}>להרשמה</span></p>
     </div>
   );
 }
