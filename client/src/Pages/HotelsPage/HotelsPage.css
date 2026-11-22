@@ -1,0 +1,15 @@
+.hotel-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+
+.hotel-details-btn {
+  padding: 0.5rem 1rem;
+  background: #6783de;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

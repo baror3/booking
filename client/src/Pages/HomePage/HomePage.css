@@ -1,0 +1,27 @@
+.home-container {
+  text-align: center;
+}
+
+.home-btn {
+  padding: 0.8rem 1.5rem;
+  background: #9dade4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.home-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.home-image {
+  max-width: 100%;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

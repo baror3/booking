@@ -1,0 +1,38 @@
+.auth-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.auth-error {
+  color: red;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-input {
+  padding: 0.5rem;
+}
+
+.register-submit-btn {
+  padding: 0.6rem;
+  background: #febb02;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-switch-text {
+  margin-top: 1rem;
+}
+
+.register-switch-link {
+  color: #9dade4;
+  cursor: pointer;
+}
