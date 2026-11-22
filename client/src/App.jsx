@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./components/HomePage/HomePage";
 import HotelsPage from "./components/HotelsPage/HotelsPage";
+import HotelDetailsPage from "./components/HotelDetailsPage/HotelDetailsPage";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -85,22 +86,12 @@ export default function App() {
         )}
 
         {currentPage === "hotel-details" && (
-          <div>
-            <h2>פרטי המלון: {selectedHotel?.name}</h2>
-            <p>עיר: {selectedHotel?.city} | ארץ: {selectedHotel?.country} | כוכבים: {selectedHotel?.stars}</p>
-            <h3>רשימת החדרים במלון:</h3>
-            {hotelRooms.length === 0 ? <p>אין חדרים זמינים במלון זה כרגע.</p> : (
-              hotelRooms.map(room => (
-                <div key={room.id} style={{ border: "1px solid #ddd", padding: "1rem", margin: "0.5rem 0", borderRadius: "4px" }}>
-                  <p><strong>{room.name}</strong> | גודל: {room.size} מ"ר | מקסימום אורחים: {room.max_guests}</p>
-                  <p>מחיר ללילה: {room.price} ₪</p>
-                  <button onClick={() => { setSelectedRoom(room); setCurrentPage("room-details"); }} style={actionBtnStyle}>
-                    לפרטי החדר
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
+          <HotelDetailsPage
+            selectedHotel={selectedHotel}
+            hotelRooms={hotelRooms}
+            setSelectedRoom={setSelectedRoom}
+            setCurrentPage={setCurrentPage}
+          />
         )}
 
         {currentPage === "room-details" && (
