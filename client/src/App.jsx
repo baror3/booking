@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./components/HomePage/HomePage";
 import HotelsPage from "./components/HotelsPage/HotelsPage";
 import HotelDetailsPage from "./components/HotelDetailsPage/HotelDetailsPage";
+import RoomDetailsPage from "./components/RoomDetailsPage/RoomDetailsPage";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -95,14 +96,10 @@ export default function App() {
         )}
 
         {currentPage === "room-details" && (
-          <div>
-            <h2>פרטי חדר: {selectedRoom?.name}</h2>
-            <p>מחיר ללילה: {selectedRoom?.price} ₪</p>
-            <p>גודל החדר: {selectedRoom?.size} מ"ר | מקסימום אורחים: {selectedRoom?.max_guests}</p>
-            <button onClick={() => handleBookingClick(selectedRoom)} style={{ ...actionBtnStyle, background: "#febb02", color: "#000", fontWeight: "bold", fontSize: "1rem" }}>
-              הזמן עכשיו
-            </button>
-          </div>
+          <RoomDetailsPage
+            selectedRoom={selectedRoom}
+            handleBookingClick={handleBookingClick}
+          />
         )}
 
         {currentPage === "booking" && (
